@@ -1,0 +1,2 @@
+{"ts":1377693776057,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"h1 Private view\np This view is visible to logged in users"]],"start1":0,"start2":0,"length1":0,"length2":57}]],"length":57}
+{"contributors":[],"silentsave":false,"ts":1377693861287,"patch":[[{"diffs":[[0,"in users"],[1,"\n.well {{ user.username }}\n.well {{ user }}"]],"start1":49,"start2":49,"length1":8,"length2":51}]],"length":100,"saved":false}

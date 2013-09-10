@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angular-client-side-auth')
+angular.module('lhplge')
 .directive('accessLevel', ['Auth', function(Auth) {
     return {
         restrict: 'A',
@@ -33,7 +33,8 @@ angular.module('angular-client-side-auth')
     };
 }]);
 
-angular.module('angular-client-side-auth').directive('activeNav', ['$location', function($location) {
+angular.module('lhplge')
+.directive('activeNav', ['$location', function($location) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {

@@ -1,0 +1,20 @@
+h1 Liste des participants
+
+table.table.table-striped(data-ng-hide="loading")
+    thead
+        tr
+            th Nom
+            th Franchise
+            th Email
+            th # Cell
+            th # Maison
+            th role
+    tbody
+        tr(data-ng-repeat="user in users")
+            td {{ user.firstName + ' ' + user.lastName }} 
+            td {{ user.franchise.nom }}
+            td {{ user.email }}
+            td {{ user.cellPhoneNumber }}
+            td {{ user.phoneNumber }}
+            td
+                span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}

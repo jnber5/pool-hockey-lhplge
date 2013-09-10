@@ -1,0 +1,74 @@
+.spinner(data-ng-hide="!loading")
+div(data-ng-hide="loading")
+    h1 {{ franchise.nom }}
+    .row-fluid
+        .well
+            .row-fluid
+                .span2 Nb. Avants :
+                .span1.text-align-right {{ (players | filter:{ position: 'A'}).length }}
+                .span3.offset3 Salaire Avants : 
+                .span2.text-align-right {{ (players | filter:{ position: 'A'}) | sumCapHit | nfcurrency }}
+            .row-fluid
+                .span2 Nb. Défenseurs :
+                .span1.text-align-right {{ (players | filter:{ position: 'D'}).length }}
+                .span3.offset3 Salaire Défenseurs :
+                .span2.text-align-right {{ (players | filter:{ position: 'D'}) | sumCapHit | nfcurrency }}
+            .row-fluid
+                .span2 Nb. Gardiens :
+                .span1.text-align-right {{ (players | filter:{ position: 'G'}).length }}
+                .span3.offset3 Salaire Gardiens :
+                .span2.text-align-right {{ (players | filter:{ position: 'G'}) | sumCapHit | nfcurrency }}
+            .row-fluid
+                b
+                    .span2 Total :
+                    .span1.text-align-right {{ players.length }}
+                    .span3.offset3 Total :
+                    .span2.text-align-right {{ players | sumCapHit | nfcurrency }}
+    h4 Avants
+    table.table.table-bordered.table-hover.table-condensed
+        thead
+            tr
+                th.span1 #
+                th.span4 Joueur
+                th.span3 Équipe
+                th.span3.text-align-right Caphit
+                th.span1 Duree
+        tbody
+            tr(ng-repeat="player in players | filter:{ position: 'A' } | orderBy:predicate")
+                td  {{$index + 1}}
+                td  {{player.firstName + ' ' + player.lastName}} 
+                td  {{player.team}} 
+                td  {{player.capHit | nfcurrency}}
+                td  {{player.duree}}
+    h4 Défenseurs
+    table.table.table-bordered.table-hover.table-condensed
+        thead
+            tr
+                th.span1 #
+                th.span4 Joueur
+                th.span3 Équipe
+                th.span3 Caphit
+                th.span1 Duree
+        tbody
+            tr(ng-repeat="player in players | filter:{ position: 'D' } | orderBy:predicate")
+                td  {{$index + 1}}
+                td  {{player.firstName + ' ' + player.lastName}} 
+                td  {{player.team}} 
+                td  {{player.capHit | nfcurrency}}
+                td  {{player.duree}}
+    h4 Gardiens
+    table.table.table-bordered.table-hover.table-condensed
+        thead
+            tr
+                th.span1 #
+                th.span4 Joueur
+                th.span3 Équipe
+                th.span3 Caphit
+                th.span1 Duree
+        tbody
+            tr(ng-repeat="player in players | filter:{ position: 'G' } | orderBy:predicate")
+                td  {{$index + 1}}
+                td  {{player.firstName + ' ' + player.lastName}} 
+                td  {{player.team}} 
+                td  {{player.capHit | nfcurrency}}
+                td  {{player.duree}}

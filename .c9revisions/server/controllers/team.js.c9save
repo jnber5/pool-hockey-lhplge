@@ -1,0 +1,2 @@
+{"ts":1378325524228,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1378325554888,"patch":[[{"diffs":[[1,"var Team =      require('../models/Team.js');\n\nmodule.exports = {\n    findAll: function(req, res) {\n        Team.findAll(res);\n    }\n};"]],"start1":0,"start2":0,"length1":0,"length2":135}]],"length":135,"saved":false}

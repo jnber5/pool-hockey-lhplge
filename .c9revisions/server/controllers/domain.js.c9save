@@ -1,0 +1,7 @@
+{"ts":1378342319079,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1378342392981,"patch":[[{"diffs":[[1,"var Domain =      require('../models/Domain.js');\n\nmodule.exports = {\n    findAll: function(req, res) {\n        Domain.findAll(res);\n    }, \n    find: function(req, res) {\n        Domain.find(req,res);\n    }\n};"]],"start1":0,"start2":0,"length1":0,"length2":210}]],"length":210,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1378343151927,"patch":[[{"diffs":[[0,"ion(req, res) {\n"],[1,"        \n        console.log(req.name);\n"],[0,"        Domain.f"]],"start1":156,"start2":156,"length1":32,"length2":72}]],"length":250,"saved":false}
+{"ts":1378343162739,"patch":[[{"diffs":[[0,"       \n"],[1,"        console.log('Paulina');\n"],[0,"        "]],"start1":173,"start2":173,"length1":16,"length2":48}]],"length":282,"saved":false}
+{"ts":1378343939559,"patch":[[{"diffs":[[0,"log(req."],[1,"body."],[0,"name);\n "]],"start1":229,"start2":229,"length1":16,"length2":21}]],"length":287,"saved":false}
+{"ts":1378344699392,"patch":[[{"diffs":[[0,"req."],[-1,"body"],[1,"params"],[0,".nam"]],"start1":233,"start2":233,"length1":12,"length2":14}]],"length":289,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1378421162891,"patch":[[{"diffs":[[0,") {\n"],[-1,"        \n        console.log('Paulina');\n        console.log(req.params.name);\n"],[0,"    "]],"start1":168,"start2":168,"length1":87,"length2":8}]],"length":210,"saved":false}

@@ -1,0 +1,3 @@
+{"ts":1378417433972,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1378417637476,"patch":[[{"diffs":[[1,"'use strict';\n\nangular.module('angular-client-side-auth')\n.controller('HomeCtrl',\n['$rootScope', function($rootScope) {\n    \n}]);"]],"start1":0,"start2":0,"length1":0,"length2":129}]],"length":129,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1378825084735,"patch":[[{"diffs":[[0,"le('"],[-1,"angular-client-side-auth"],[1,"lhplge"],[0,"')\n."]],"start1":27,"start2":27,"length1":32,"length2":14}]],"length":111,"saved":false}

@@ -1,0 +1,14 @@
+form.form-horizontal.ng-scope.ng-pristine.ng-invalid.ng-invalid-required(ng-submit='addPlayer()', name='addPlayerForm')
+    .panel.panel-primary.margin-top-40
+        .panel-heading
+          h5.panel-title Informations nominatives
+        .row
+          .span2
+            img(src='/img/nhl.png')
+          .span4
+            p(style='margin-top: 20px;')
+              input.input-block-level(type='text', ng-model='firstName', name='firstName', placeholder='Prénom')
+            p
+              input.input-block-level(type='text', ng-model='lastName', name='lastName', placeholder='Nom')
+            p
+              button.btn.pull-right(type='submit') Save

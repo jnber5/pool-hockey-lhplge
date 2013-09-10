@@ -1,51 +1,110 @@
 !!! 5
-html(lang='en', data-ng-app='angular-client-side-auth')
+html(lang='en', data-ng-app='lhplge')
     head
         meta(charset='utf-8')
         title Angular Auth Example
-        link(rel='stylesheet', href='css/app.css')
-        link(href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css", rel="stylesheet")
-        link(href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css", rel="stylesheet")
+        link(rel='stylesheet', href='/css/app.css')
+        link(href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css", rel="stylesheet")
 
-        // This is needed because Facebook login redirects add #_=_ at the end of the URL
-        script(type="text/javascript").
-            if (window.location.href.indexOf('#_=_') > 0) {
-                window.location = window.location.href.replace(/#.*/, '');
-            }
     body(data-ng-cloak)
-
-        .navbar(data-ng-controller="NavCtrl")
+        .navbar.navbar-fixed-top(data-ng-controller="NavCtrl")
             .navbar-inner
-                .container-fluid
-                    ul.nav
-                        li(data-access-level='accessLevels.anon', active-nav)
-                            a(href='/login') Log in
-                        li(data-access-level='accessLevels.anon', active-nav)
-                            a(href='/register') Register
-                        li(data-access-level='accessLevels.user', active-nav)
-                            a(href='/') Home
-                        li(data-access-level='accessLevels.user', active-nav)
-                            a(href='/private') Private
-                        li(data-access-level='accessLevels.admin', active-nav)
-                            a(href='/admin') Admin
-                        li(data-access-level='accessLevels.user')
-                            a(href="", data-ng-click="logout()")
-                                | Log out
-                    div#userInfo.pull-right(data-access-level='accessLevels.user')
-                        | Welcome&nbsp;
-                        strong {{ user.username }}&nbsp;
-                        span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
+                .container
+                    a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.brand(href="/")
+                    .nav-collapse.collapse
+                        ul.nav
+                            li.dropdown(data-access-level='accessLevels.admin', active-nav)
+                                a.dropdown-toggle(href="#" data-toggle="dropdown") Users
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href="/user/add") Create User
+                                    li
+                                        a(href="/users") List Users
+                            li.dropdown(data-access-level='accessLevels.admin', active-nav)
+                                a.dropdown-toggle(href="#" data-toggle="dropdown") Players
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href="/players") List Players
+                                    li
+                                        a(href="/player/add") Create Player
+                            li.dropdown(data-access-level='accessLevels.admin', active-nav)
+                                a.dropdown-toggle(href="#" data-toggle="dropdown") Contracts
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href="/contracts") List Contracts
+                                    li
+                                        a(href="/contract/add") Add Contract
+                            li.dropdown(data-access-level='accessLevels.user', active-nav)
+                                a.dropdown-toggle(href="#" data-toggle="dropdown") Franchises
+                                    b.caret
+                                ul.dropdown-menu
+                                    li(ng-repeat="franchise in franchises")
+                                        a(href="/franchise/{{franchise._id}}") {{franchise.nom}}
+                            li(data-access-level='accessLevels.user', active-nav)
+                                a(href='/agentsLibres') Agents Libres
+                            li.dropdown(data-access-level='accessLevels.admin', active-nav)
+                                a.dropdown-toggle(href="#" data-toggle="dropdown") Misc
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href="/team/add") Add Team
+                                    li
+                                        a(href="/teams") List Teams
+                                    li
+                                        a(href="/season/add") Add Season
+                                    li
+                                        a(href="/seasons") List Season
+                                    li
+                                        a(href="/period/add") Create Period
+                                    li
+                                        a(href="/periods") List Periods
+                                    li
+                                        a(href="/domain/add") Add Domain
+                                    li
+                                        a(href="/domains") List Domains
+                            li(data-access-level='accessLevels.anon', active-nav)
+                                a(href='/login') Log in
+                            li(data-access-level='accessLevels.anon', active-nav)
+                                a(href='/register') Register
+                            li(data-access-level='accessLevels.user', active-nav)
+                                a(href='/') Home
+                            li(data-access-level='accessLevels.user', active-nav)
+                                a(href='/private') Private
+                            li(data-access-level='accessLevels.user')
+                                a(href="", data-ng-click="logout()")
+                                    | Log out
+                        div#userInfo.pull-right(data-access-level='accessLevels.user')
+                            | Welcome&nbsp;
+                            strong {{ user.username }}&nbsp;
+                            span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
 
-        .container
+        .container.main
             div(data-ng-view='ng-view')
             .alert.alert-error(data-ng-bind="error", data-ng-show="error")
-
+        script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
         script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-cookies.js')
+        script(src='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js')
         script(src='/js/routingConfig.js')
         script(src='/js/app.js')
         script(src='/js/services.js')
-        script(src='/js/controllers.js')
         script(src='/js/filters.js')
         script(src='/js/directives.js')
+        script(src='/js/angular-locale_fr-ca.js')
+        script(src='/js/controllers/home.js')
+        script(src='/js/controllers/login.js')
+        script(src='/js/controllers/nav.js')
+        script(src='/js/controllers/player.js')
+        script(src='/js/controllers/contract.js')
+        script(src='/js/controllers/private.js')
+        script(src='/js/controllers/register.js')
+        script(src='/js/controllers/users.js')
+        script(src='/js/controllers/franchise.js')

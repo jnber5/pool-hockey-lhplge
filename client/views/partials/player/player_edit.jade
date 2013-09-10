@@ -1,0 +1,89 @@
+.panel.panel-primary.margin-top-40
+    .panel-heading
+        h5.panel-title Informations nominatives
+    .row
+        .span2
+            img(src='/img/nhl.png')
+        .span4
+            p(style='margin-top: 20px;')
+                input.input-block-level(type='text', placeholder='Prénom', ng-model='player.firstName')
+            p
+                input.input-block-level(type='text', placeholder='Nom', ng-model='player.lastName')
+            p
+                a.btn.pull-right(href='#') Update
+.panel.panel-primary
+    .panel-heading
+        h5.panel-title Équipe NHL
+    form.form-horizontal.ng-scope.ng-pristine.ng-invalid.ng-invalid-required(ng-submit='addPlayerHistory()', ng-show='!player.histories || player.histories[player.histories.length - 1].endDate != \'9999-12-31T00:00:00.000Z\'', name='addPlayerHistoryForm')
+        .well.well-large
+            .row
+                .span3
+                    label Équipe
+                    select#team.input-block-level.ng-pristine.ng-invalid.ng-invalid-required(name='team', ng-model='team', ng-options='team as team.city for team in teams', required='required')
+                .span2
+                    label Position
+                    select#position.input-block-level.ng-pristine.ng-invalid.ng-invalid-required(name='position', ng-model='position', ng-options='position as position.value for position in positions', required='required')
+                .span1
+                    label Numéro
+                    input.input-block-level.ng-pristine.ng-invalid.ng-invalid-required(type='text', name='number', ng-model='number')
+                .span2
+                    label Date début
+                    input.input-block-level.ng-pristine.ng-invalid.ng-invalid-required(type='date', name='historyStartDate', ng-model='historyStartDate', required='required')
+                .span2
+                    label Date Fin
+                    input.input-block-level.ng-pristine.ng-invalid(type='date', name='historyEndDate', ng-model='historyEndDate')
+                .span1
+                    button.btn(type='submit') Submit
+    table.table.table-bordered.table-hover(ng-show="player.histories.length > 0")
+        thead
+            tr
+                th.span4 Équipe
+                th.span2 Position
+                th.span1 Numéro
+                th.span2 Date début
+                th.span2 Date Fin
+                th.span1 Action
+        tbody
+            tr(ng-repeat="history in player.histories | orderBy:'endDate':true")
+                td {{ history.team.city }}
+                td {{ history.position }}
+                td {{ history.number }}
+                td {{ convertDate(history.startDate) | date:'d MMMM yyyy'}}
+                td
+                    label(ng-show="history.endDate != '9999-12-31T00:00:00.000Z'") {{ convertDate(history.endDate) | date:'d MMMM yyyy'}}
+                    input(type='date', ng-show="history.endDate == '9999-12-31T00:00:00.000Z'", name='histEndDate', required='required', ng-model='histEndDate')
+                td
+                    a.btn(href='#', ng-show="history.endDate == '9999-12-31T00:00:00.000Z'", ng-click='endPlayerHistory(history._id, histEndDate)') Terminer
+.panel.panel-primary
+    .panel-heading
+        h5.panel-title Salaire
+    form#addPlayerSalaryForm.form-horizontal.ng-scope.ng-pristine.ng-invalid.ng-invalid-required(ng-submit='addPlayerSalary()', ng-show='showSalary', name='addPlayerSalaryForm')
+        .well.well-large
+            .row
+                .span3
+                    label Caphit
+                    input.input-block-level.ng-pristine.ng-invalid.ng-invalid-required(type='text', name='caphit', ng-model='caphit', required='required')
+                .span2
+                    label Date début
+                    input.input-block-level.ng-pristine.ng-invalid.ng-invalid-required(type='date', name='salaryStartDate', ng-model='salaryStartDate', required='required')
+                .span2
+                    label Date Fin
+                    input.input-block-level.ng-pristine.ng-invalid(type='date', name='salaryEndDate', ng-model='salaryEndDate')
+                .span1
+                  button.btn(type='submit') Submit
+    table.table.table-bordered.table-hover(ng-show="player.salaries.length > 0")
+        thead
+            tr
+                th.span4 Caphit
+                th.span2 Date début
+                th.span1 Date fin
+                th.span1 Action
+        tbody
+            tr(ng-repeat="salary in player.salaries | orderBy:'endDate':true")
+                td {{ salary.caphit }}
+                td {{ convertDate(salary.startDate)  | date:'d MMMM yyyy'}}
+                td {{ convertDate(salary.endDate)  | date:'d MMMM yyyy'}}
+                td
+                    a#newSalary.btn(href='#', ng-click='endPlayerHistory(history._id, histEndDate)') Terminer
+    .row
+        a#newSalary.btn.pull-right(href='#', ng-click='showSalary = !showSalary') Nouveau

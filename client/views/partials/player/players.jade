@@ -1,0 +1,20 @@
+.spinner(data-ng-hide="!loading")
+div
+    table.table.table-bordered.table-hover.table-condensed(data-ng-hide="loading")
+        thead
+            tr
+                th Joueur
+                th Équipe
+                th Position
+                th Caphit
+                th Duree
+                th Action
+        tbody
+            tr(ng-repeat='player in players')
+                td  {{player.firstName + ' ' + player.lastName}} 
+                td  {{player.team}} 
+                td  {{player.position}} 
+                td  {{player.capHit}}
+                td  {{player.duree}}
+                td
+                    a.btn.btn-small(href='/player/edit/{{player.id}}') Edit

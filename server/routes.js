@@ -1,9 +1,12 @@
 var _ =           require('underscore')
     , path =      require('path')
-    , passport =  require('passport')
     , AuthCtrl =  require('./controllers/auth')
     , UserCtrl =  require('./controllers/user')
-    , User =      require('./models/User.js')
+    , FranchiseCtrl =  require('./controllers/franchise')
+    , PlayerCtrl =  require('./controllers/player')
+    , TeamCtrl =    require('./controllers/team')
+    , DomainCtrl = require('./controllers/domain')
+    , ContractCtrl = require('./controllers/contract')
     , userRoles = require('../client/js/routingConfig').userRoles
     , accessLevels = require('../client/js/routingConfig').accessLevels;
 
@@ -17,60 +20,6 @@ var routes = [
             var requestedView = path.join('./', req.url);
             res.render(requestedView);
         }]
-    },
-
-    // OAUTH
-    {
-        path: '/auth/twitter',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('twitter')]
-    },
-    {
-        path: '/auth/twitter/callback',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('twitter', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })]
-    },
-    {
-        path: '/auth/facebook',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('facebook')]
-    },
-    {
-        path: '/auth/facebook/callback',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('facebook', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })]
-    },
-    {
-        path: '/auth/google',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('google')]
-    },
-    {
-        path: '/auth/google/return',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('google', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })]
-    },
-    {
-        path: '/auth/linkedin',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('linkedin')]
-    },
-    {
-        path: '/auth/linkedin/callback',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('linkedin', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })]
     },
 
     // Local Auth
@@ -90,11 +39,100 @@ var routes = [
         middleware: [AuthCtrl.logout]
     },
 
-    // User resource
     {
-        path: '/users',
+        path: '/api/users',
         httpMethod: 'GET',
-        middleware: [UserCtrl.index],
+        middleware: [UserCtrl.findAll],
+        accessLevel: accessLevels.user
+    },
+    
+    {
+        path: '/api/franchises',
+        httpMethod: 'GET',
+        middleware: [FranchiseCtrl.findAll],
+    },
+    
+    {
+        path: '/api/franchise/:id',
+        httpMethod: 'GET',
+        middleware: [FranchiseCtrl.find],
+        accessLevel: accessLevels.user
+    },
+    
+    {
+        path: '/api/players',
+        httpMethod: 'GET',
+        middleware: [PlayerCtrl.findAll],
+        accessLevel: accessLevels.user
+    },
+    
+    {
+        path: '/api/player/:id',
+        httpMethod: 'GET',
+        middleware: [PlayerCtrl.find],
+        accessLevel: accessLevels.user
+    },
+    
+    {
+        path: '/api/player',
+        httpMethod: 'POST',
+        middleware: [PlayerCtrl.add],
+        accessLevel: accessLevels.admin
+    },
+    
+    {
+        path: '/api/playerHistory',
+        httpMethod: 'POST',
+        middleware: [PlayerCtrl.addHistory],
+        accessLevel: accessLevels.admin
+    },
+    
+    {
+        path: '/api/playerHistory',
+        httpMethod: 'PUT',
+        middleware: [PlayerCtrl.endHistory],
+        accessLevel: accessLevels.admin
+    },
+    
+    {
+        path: '/api/playerSalary',
+        httpMethod: 'POST',
+        middleware: [PlayerCtrl.addSalary],
+        accessLevel: accessLevels.admin
+    },
+    
+    {
+        path: '/api/teams',
+        httpMethod: 'GET',
+        middleware: [TeamCtrl.findAll],
+        accessLevel: accessLevels.user
+    },
+    
+    {
+        path: '/api/domain/:name',
+        httpMethod: 'GET',
+        middleware: [DomainCtrl.find],
+        accessLevel: accessLevels.user
+    },
+    
+    {
+        path: '/api/contract/playersUnderContract/:franchise/:dateConsultation',
+        httpMethod: 'GET',
+        middleware: [ContractCtrl.playersUnderContract],
+        accessLevel: accessLevels.user
+    },
+    
+     {
+        path: '/api/contracts/:dateConsultation',
+        httpMethod: 'GET',
+        middleware: [ContractCtrl.findAll],
+        accessLevel: accessLevels.user
+    },
+    
+    {
+        path: '/api/contract',
+        httpMethod: 'POST',
+        middleware: [ContractCtrl.add],
         accessLevel: accessLevels.admin
     },
 
@@ -103,10 +141,14 @@ var routes = [
         path: '/*',
         httpMethod: 'GET',
         middleware: [function(req, res) {
-            var role = userRoles.public, username = '';
+            
+            var role = userRoles.public, username = '', id = '', franchise = '', email = '';
             if(req.user) {
                 role = req.user.role;
                 username = req.user.username;
+                id = req.user.id;
+                franchise = req.user.franchise;
+                email = req.user.email;
             }
             res.cookie('user', JSON.stringify({
                 'username': username,
@@ -141,7 +183,7 @@ module.exports = function(app) {
                 break;
         }
     });
-}
+};
 
 function ensureAuthorized(req, res, next) {
     var role;

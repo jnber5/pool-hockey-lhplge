@@ -1,0 +1,3 @@
+{"ts":1378417441325,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1378417634274,"patch":[[{"diffs":[[1,"'use strict';\n\nangular.module('angular-client-side-auth')\n.controller('PrivateCtrl',\n['$rootScope', '$scope', 'Auth', function($rootScope, $scope, Auth) {\n    \n    $scope.user = Auth.user;\n    \n}]);\n"]],"start1":0,"start2":0,"length1":0,"length2":199}]],"length":199,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1378825115497,"patch":[[{"diffs":[[0,"le('"],[-1,"angular-client-side-auth"],[1,"lhplge"],[0,"')\n."]],"start1":27,"start2":27,"length1":32,"length2":14}]],"length":181,"saved":false}

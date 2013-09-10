@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angular-client-side-auth', ['ngCookies'])
+angular.module('lhplge', ['ngCookies'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -18,6 +18,48 @@ angular.module('angular-client-side-auth', ['ngCookies'])
             controller:     'LoginCtrl',
             access:         access.anon
         });
+    $routeProvider.when('/players',
+        {
+            templateUrl:    '/partials/player/players',
+            controller:     'PlayersCtrl',
+            access:         access.user
+        });
+     $routeProvider.when('/agentsLibres',
+        {
+            templateUrl:    '/partials/player/agentsLibres',
+            controller:     'AgentsLibresCtrl',
+            access:         access.user
+        });
+    $routeProvider.when('/player/add',
+        {
+            templateUrl: '/partials/player/player_add',
+            controller: 'PlayerAddCtrl',
+            access: access.admin
+        });
+    $routeProvider.when('/player/edit/:id',
+        {
+            templateUrl:    '/partials/player/player_edit',
+            controller:     'PlayerEditCtrl',
+            access:         access.admin
+        });
+    $routeProvider.when('/contract/add',
+        {
+            templateUrl: '/partials/contract/contract_add',
+            controller: 'ContractAddCtrl',
+            access: access.admin
+        });
+    $routeProvider.when('/franchise/:id',
+        {
+            templateUrl:    '/partials/franchise/franchise',
+            controller:     'FranchiseCtrl',
+            access:         access.user
+        });
+    $routeProvider.when('/users',
+        {
+            templateUrl:    '/partials/user/users',
+            controller:     'UsersCtrl',
+            access:         access.admin
+        });
     $routeProvider.when('/register',
         {
             templateUrl:    '/partials/register',
@@ -29,12 +71,6 @@ angular.module('angular-client-side-auth', ['ngCookies'])
             templateUrl:    '/partials/private',
             controller:     'PrivateCtrl',
             access:         access.user
-        });
-    $routeProvider.when('/admin',
-        {
-            templateUrl:    '/partials/admin',
-            controller:     'AdminCtrl',
-            access:         access.admin
         });
     $routeProvider.when('/404',
         {

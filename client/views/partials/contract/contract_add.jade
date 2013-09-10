@@ -1,0 +1,37 @@
+h2 Ajout d'une nouveau contrat
+br
+.spinner(data-ng-hide="!loading")
+form.form-horizontal.ng-scope.ng-pristine.ng-invalid.ng-invalid-required(ng-submit='addContract()' data-ng-hide="loading", name='addContractForm')
+  .row-fluid.margin-bottom-20
+    .span12
+        label Franchise
+        select#user.ng-pristine.ng-invalid.ng-invalid-required(name='franchise', ng-model='franchise', ng-options='franchise as franchise.nom for franchise in franchises', ng-change='updateListeJoueursSousContrat()' required='required')
+  .row-fluid.margin-bottom-20
+    .span3
+        label Type Acquisition
+        select#acquisition.ng-pristine.ng-invalid.ng-invalid-required(name='acquisition', ng-model='acquisition', ng-options='acquisition as acquisition.value for acquisition in acquisitions', required='required')
+    .span3
+        label Date Acquisition
+        input.input-block-level.ng-pristine.ng-invalid.ng-invalid-required(type='date', name='dateAcquisition', ng-model='dateAcquisition', required='required')
+    .span3
+        label Raison Fin
+        select#fin.ng-pristine.ng-invalid.ng-invalid-required(name='fin', ng-model='fin', ng-options='fin as fin.value for fin in fins', required='required')
+    .span3(ng-show="fin.code != 10")
+        label Date Fin
+        input.input-block-level.ng-pristine.ng-invalid.ng-invalid-required(type='date', name='dateFin', ng-model='dateFin')
+  hr
+  .row-fluid
+    .span3
+        label Joueurs disponibles
+        select#player.ng-pristine.ng-invalid.ng-invalid-required.input-block-level(name='player', ng-model='player' ng-options="player as player.lastName + ', ' + player.firstName for player in players",  required='required', size='20')
+    .span2(ng-show="franchise")
+        button.btn(type='submit') Submit
+    .span7(ng-show="franchise")
+        label Joueurs déjà sous contrat
+        table.table.table-bordered.table-hover.table-condensed 
+            tr(ng-repeat='player in joueursSousContrat')
+                td  {{player.firstName + ' ' + player.lastName}} 
+                td  {{player.team}} 
+                td  {{player.position}} 
+                td  {{player.capHit}}
+                td  {{player.duree}}

@@ -1,0 +1,7 @@
+{"ts":1378232554385,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1378232567079,"patch":[[{"diffs":[[1,"var Franchise =      require('../models/Franchise.js');\n\nmodule.exports = {\n    index: function(req, res) {\n        User.findAll(res);\n    }\n};"]],"start1":0,"start2":0,"length1":0,"length2":143}]],"length":143,"saved":false}
+{"ts":1378232578633,"patch":[[{"diffs":[[0,"    "],[-1,"U"],[1,"Franchi"],[0,"se"],[-1,"r"],[0,".fin"]],"start1":112,"start2":112,"length1":12,"length2":17}]],"length":148,"saved":false}
+{"ts":1378232588817,"patch":[[{"diffs":[[0,"    "],[1,"f"],[0,"ind"],[-1,"ex"],[1,"All"],[0,": fu"]],"start1":76,"start2":76,"length1":13,"length2":15}]],"length":150,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1378233552041,"patch":[[{"diffs":[[0," res) {\n"],[1,"        console.log(res);\n"],[0,"        "]],"start1":102,"start2":102,"length1":16,"length2":42}]],"length":176,"saved":false}
+{"ts":1378233590648,"patch":[[{"diffs":[[0,"s);\n"],[-1,"        Franchise.findAll(res);\n"],[0,"    "]],"start1":132,"start2":132,"length1":40,"length2":8}]],"length":144,"saved":false}
+{"ts":1378233664132,"patch":[[{"diffs":[[0,"    "],[-1,"console.log"],[1,"Franchise.findAll"],[0,"(res"]],"start1":114,"start2":114,"length1":19,"length2":25}]],"length":150,"saved":false}

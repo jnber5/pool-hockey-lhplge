@@ -2,13 +2,14 @@ var express =       require('express')
     , http =        require('http')
     , passport =    require('passport')
     , path =        require('path')
-    , User =        require('./server/models/User.js');
+    , User =        require('./server/models/User.js')
+    , mongoose =    require('mongoose');
 
 var app = express();
 
 app.set('views', __dirname + '/client/views');
 app.set('view engine', 'jade');
-app.use(express.logger('dev'))
+app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -21,13 +22,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(User.localStrategy);
-passport.use(User.twitterStrategy());  // Comment out this line if you don't want to enable login via Twitter
-passport.use(User.facebookStrategy()); // Comment out this line if you don't want to enable login via Facebook
-passport.use(User.googleStrategy());   // Comment out this line if you don't want to enable login via Google
-passport.use(User.linkedInStrategy()); // Comment out this line if you don't want to enable login via LinkedIn
 
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
+
+mongoose.connect('mongodb://jnber5:berube44@widmore.mongohq.com:10010/lhplge');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback() {
+    console.log('Connected to DB');
+});
 
 require('./server/routes.js')(app);
 

@@ -1,0 +1,66 @@
+.spinner(data-ng-hide="!loading")
+div
+    table.table.table-bordered.table-hover.table-condensed.span12(data-ng-hide="loading")
+        thead
+            tr 
+                th.span4 Joueur
+                th.span3 Équipe
+                th.span1 Position
+                th.span2 Caphit
+                th.span2 Duree
+        tbody
+            tr 
+                td 
+                td 
+                    select#team-filter.input-block-level.ng-pristine(ng-model="query.team")
+                        option(value='') All
+                        option(value='Anaheim') Anaheim
+                        option(value='Boston') Boston
+                        option(value='Buffalo') Buffalo
+                        option(value='Calgary') Calgary
+                        option(value='Carolina') Carolina
+                        option(value='Chicago') Chicago
+                        option(value='Colorado') Colorado
+                        option(value='Columbus') Columbus
+                        option(value='Dallas') Dallas
+                        option(value='Detroit') Detroit
+                        option(value='Edmonton') Edmonton
+                        option(value='Florida') Florida
+                        option(value='Los Angeles') Los Angeles
+                        option(value='Minnesota') Minnesota
+                        option(value='Montreal') Montreal
+                        option(value='Nashville') Nashville
+                        option(value='New Jersey') New Jersey
+                        option(value='New-York') New-York
+                        option(value='New-York') New-York
+                        option(value='Ottawa') Ottawa
+                        option(value='Philadelphia') Philadelphia
+                        option(value='Phoenix') Phoenix
+                        option(value='Pittsburg') Pittsburg
+                        option(value='San Jose') San Jose
+                        option(value='St. Louis') St. Louis
+                        option(value='Tampa Bay') Tampa Bay
+                        option(value='Toronto') Toronto
+                        option(value='Vancouver') Vancouver
+                        option(value='Washington') Washington
+                        option(value='Winnipeg') Winnipeg
+                        option(value='Free Agent') Free Agent
+                td 
+                    select#position-filter.input-block-level.ng-pristine(ng-model="query.position")
+                        option(value='') All
+                        option(value='A') Avant
+                        option(value='D') Défenseur
+                        option(value='G') Gardien
+                td
+                td 
+                    select#duree-filter.input-block-level.ng-pristine(ng-model="query.duree")
+                        option(value='') All
+                        option(value='1') 1
+                        option(value='2') 2
+                        option(value='3') 3
+            tr(ng-repeat='player in players | agentsLibres:contracts | filter:query | orderBy:predicate ')
+                td  {{player.firstName + ' ' + player.lastName}} 
+                td  {{player.team}} 
+                td  {{player.position}} 
+                td  {{player.capHit | nfcurrency }}
+                td  {{player.duree}}

@@ -23,18 +23,20 @@ module.exports = {
 
     login: function(req, res, next) {
         passport.authenticate('local', function(err, user) {
+            
+            
+            console.log('étape 1 :' + user);
 
             if(err)     { return next(err); }
             if(!user)   { return res.send(400); }
-
 
             req.logIn(user, function(err) {
                 if(err) {
                     return next(err);
                 }
-
+                
                 if(req.body.rememberme) req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
-                res.json(200, { "role": user.role, "username": user.username });
+                res.json(200, { "role": user.role, "username": user.username, "id": user._id, "franchise": user.franchise, "email": user.email });
             });
         })(req, res, next);
     },
