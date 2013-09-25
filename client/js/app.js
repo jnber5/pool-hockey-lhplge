@@ -30,6 +30,11 @@ angular.module('lhplge', ['ngCookies'])
             controller:     'AgentsLibresCtrl',
             access:         access.user
         });
+    $routeProvider.when('/draft',
+        {
+            templateUrl:    '/partials/repechage/ordre',
+            access:         access.user
+        });
     $routeProvider.when('/player/add',
         {
             templateUrl: '/partials/player/player_add',
