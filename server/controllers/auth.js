@@ -23,10 +23,6 @@ module.exports = {
 
     login: function(req, res, next) {
         passport.authenticate('local', function(err, user) {
-            
-            
-            console.log('étape 1 :' + user);
-
             if(err)     { return next(err); }
             if(!user)   { return res.send(400); }
 

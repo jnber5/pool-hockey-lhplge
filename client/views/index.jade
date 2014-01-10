@@ -19,6 +19,8 @@ html(lang='en', data-ng-app='lhplge')
                         ul.nav
                             li(data-access-level='accessLevels.user', active-nav)
                                 a(href='/') Accueil
+                            li(data-access-level='accessLevels.user', active-nav)
+                                a(href='/classement') Classement
                             li.dropdown(data-access-level='accessLevels.admin', active-nav)
                                 a.dropdown-toggle(href="#" data-toggle="dropdown") Users
                                     b.caret
@@ -106,3 +108,4 @@ html(lang='en', data-ng-app='lhplge')
         script(src='/js/controllers/register.js')
         script(src='/js/controllers/users.js')
         script(src='/js/controllers/franchise.js')
+        script(src='/js/controllers/classement.js')

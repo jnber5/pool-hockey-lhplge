@@ -74,6 +74,18 @@ angular.module('lhplge')
 });
 
 angular.module('lhplge')
+.factory('Classement', function($http) {
+    return {
+        getAll: function(success, error) {
+            $http.get('/api/classement').success(success).error(error);
+        },
+        save: function(classement, success, error) {
+            $http.post('api/classement', classement).success(success).error(error);
+        }
+    };
+});
+
+angular.module('lhplge')
 .factory('Players', function($http) {
     return {
         getAll: function(success, error) {

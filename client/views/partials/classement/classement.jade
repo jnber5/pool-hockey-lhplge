@@ -1,0 +1,31 @@
+div
+    table.table.table-bordered.table-hover.table-condensed.span12(data-ng-hide="loading")
+        thead
+            tr 
+                th.span1
+                    a(href="" ng-click="predicate = 'franchise.nom'; reverse=!reverse") Franchise
+                th.span2
+                    a(href="" ng-click="predicate = 'pointsPeriode1'; reverse=!reverse") Période 1
+                th.span2
+                    a(href="" ng-click="predicate = 'pointsPeriode2'; reverse=!reverse") Période 2
+                th.span2
+                    a(href="" ng-click="predicate = 'pointsPeriode3'; reverse=!reverse") Période 3
+                th.span2
+                    a(href="" ng-click="predicate = 'pointsPeriode4'; reverse=!reverse") Période 4
+                th.span2
+                    a(href="" ng-click="predicate = 'pointsPeriode5'; reverse=!reverse") Période 5
+                th.span1
+                    a(href="" ng-click="predicate = 'pointsTotal'; reverse=!reverse") Total
+                
+        tbody
+            tr(ng-repeat="item in classement | orderBy:predicate:reverse")
+                    td  {{item.franchise.nom}} 
+                    td  {{item.pointsPeriode1}} 
+                    td  {{item.pointsPeriode2}} 
+                    td  
+                        input(type="number" ng-model="item.pointsPeriode3")
+                    td  {{item.pointsPeriode4}}
+                    td  {{item.pointsPeriode5}}
+                    td  {{ item.pointsTotal }}
+    button.btn(type="button" ng-click="save()") Sauvegarder
+    p Derniere mise à jour : {{classement[0].dateMiseAJour}} par : {{classement[0].userModif}}

@@ -7,6 +7,7 @@ var _ =           require('underscore')
     , TeamCtrl =    require('./controllers/team')
     , DomainCtrl = require('./controllers/domain')
     , ContractCtrl = require('./controllers/contract')
+    , ClassementCtrl = require('./controllers/classement')
     , userRoles = require('../client/js/routingConfig').userRoles
     , accessLevels = require('../client/js/routingConfig').accessLevels;
 
@@ -135,6 +136,20 @@ var routes = [
         middleware: [ContractCtrl.add],
         accessLevel: accessLevels.admin
     },
+    
+    {
+        path: '/api/classement',
+        httpMethod: 'GET',
+        middleware: [ClassementCtrl.findAll],
+        accessLevel: accessLevels.user
+    },
+    
+    {
+        path: '/api/classement',
+        httpMethod: 'POST',
+        middleware: [ClassementCtrl.save],
+        accessLevel: accessLevels.user
+    },
 
     // All other get requests should be handled by AngularJS's client-side routing system
     {
@@ -142,17 +157,21 @@ var routes = [
         httpMethod: 'GET',
         middleware: [function(req, res) {
             
-            var role = userRoles.public, username = '', id = '', franchise = '', email = '';
+            var role = userRoles.public, username = '', id = '', franchise = '', email = '', nickname = '';
             if(req.user) {
                 role = req.user.role;
                 username = req.user.username;
                 id = req.user.id;
                 franchise = req.user.franchise;
                 email = req.user.email;
+                nickname = req.user.nickname;
             }
+
             res.cookie('user', JSON.stringify({
                 'username': username,
-                'role': role
+                'role': role,
+                'franchise': franchise,
+                'nickname': nickname
             }));
             res.render('index');
         }]

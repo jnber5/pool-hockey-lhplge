@@ -5,7 +5,6 @@ angular.module('lhplge')
 ['$rootScope','$scope', '$location','Franchises', 'Auth', function($rootScope, $scope, $location, Franchises, Auth) {
     
     $scope.loading = true;
-    console.log(Auth.user);
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
     $scope.accessLevels = Auth.accessLevels;

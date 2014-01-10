@@ -30,6 +30,12 @@ angular.module('lhplge', ['ngCookies'])
             controller:     'AgentsLibresCtrl',
             access:         access.user
         });
+    $routeProvider.when('/classement',
+        {
+            templateUrl:    '/partials/classement/classement',
+            controller:     'ClassementCtrl',
+            access:         access.user
+        });
     $routeProvider.when('/draft',
         {
             templateUrl:    '/partials/repechage/ordre',
